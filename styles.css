@@ -277,3 +277,29 @@ button.secondary {
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  
+  /* Center the container on the screen */
+  .hero-header {
+    justify-content: center; /* Centers items horizontally */
+    width: 100%;             /* Ensures it spans full width */
+  }
+
+  /* Adjust the text size if needed */
+  .hero-header h1 {
+    font-size: 2rem; /* Keeps the name readable but not massive */
+    text-align: center;
+  }
+
+  /* Shrink the wave slightly for mobile balance */
+  .music-waves {
+    height: 20px; /* Smaller height */
+    gap: 2px;     /* Tighter spacing */
+  }
+  
+  .music-waves span {
+    width: 3px;   /* Thinner bars */
+  }
+}
