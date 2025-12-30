@@ -1,48 +1,17 @@
-// Smooth scroll
-document.querySelectorAll("[data-target]").forEach(el => {
-  el.addEventListener("click", () => {
-    document.getElementById(el.dataset.target)
+/* ===============================
+   SMOOTH SCROLL NAVIGATION
+================================ */
+document.querySelectorAll("[data-target]").forEach(item => {
+  item.addEventListener("click", () => {
+    document
+      .getElementById(item.dataset.target)
       .scrollIntoView({ behavior: "smooth" });
   });
 });
 
-// Scroll progress bar
-window.addEventListener("scroll", () => {
-  const scrolled = window.scrollY;
-  const height = document.body.scrollHeight - window.innerHeight;
-  document.getElementById("progress-bar").style.width =
-    `${(scrolled / height) * 100}%`;
-});
-
-// Active nav
-const sections = document.querySelectorAll("section");
-const links = document.querySelectorAll("nav a");
-
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(sec => {
-    if (scrollY >= sec.offsetTop - 150) current = sec.id;
-  });
-  links.forEach(link =>
-    link.classList.toggle("active", link.dataset.target === current)
-  );
-});
-
-// Reveal on scroll
-const reveals = document.querySelectorAll(".reveal");
-
-const revealOnScroll = () => {
-  reveals.forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-      el.classList.add("visible");
-    }
-  });
-};
-
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
-
-// Dynamic hero text
+/* ===============================
+   HERO TEXT ROTATION
+================================ */
 const phrases = [
   "I build systems, not shortcuts.",
   "I learn by rebuilding environments.",
@@ -50,10 +19,83 @@ const phrases = [
   "Iteration over imitation."
 ];
 
-let i = 0;
-const dynamicLine = document.getElementById("dynamic-line");
-
+let phraseIndex = 0;
 setInterval(() => {
-  dynamicLine.textContent = phrases[i];
-  i = (i + 1) % phrases.length;
+  const el = document.getElementById("dynamic-line");
+  if (el) {
+    el.textContent = phrases[phraseIndex];
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+  }
 }, 3000);
+
+/* ===============================
+   SCROLL REVEAL
+================================ */
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
+
+document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
+
+/* ===============================
+   SCROLL PROGRESS BAR
+================================ */
+window.addEventListener("scroll", () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  document.getElementById("progress-bar").style.width = `${progress}%`;
+});
+
+/* ===============================
+   NAVBAR SHRINK ON SCROLL
+================================ */
+const navbar = document.querySelector(".navbar");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 80) {
+    navbar.classList.add("shrink");
+  } else {
+    navbar.classList.remove("shrink");
+  }
+});
+
+/* ===============================
+   MOBILE MENU TOGGLE
+================================ */
+const menuToggle = document.getElementById("menu-toggle");
+const navMenu = document.getElementById("nav-menu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("open");
+});
+
+/* ===============================
+   ACTIVE NAV LINK
+================================ */
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 140) {
+      current = section.id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.dataset.target === current) {
+      link.classList.add("active");
+    }
+  });
+});
