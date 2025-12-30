@@ -33,6 +33,29 @@ menuToggle.addEventListener("click", () => {
   navMenu.classList.toggle("open");
 });
 
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+window.addEventListener("scroll", () => {
+  let current = "";
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    if (window.scrollY >= sectionTop) {
+      current = section.getAttribute("id");
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove("active");
+    if (link.dataset.target === current) {
+      link.classList.add("active");
+    }
+  });
+});
+
+
+
 document.querySelectorAll("#nav-menu a").forEach(link => {
   link.addEventListener("click", () => {
     navMenu.classList.remove("open");
