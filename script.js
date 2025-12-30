@@ -1,34 +1,31 @@
 // Smooth scroll
-document.querySelectorAll("[data-target]").forEach(item => {
-  item.addEventListener("click", () => {
-    document.getElementById(item.dataset.target)
+document.querySelectorAll("[data-target]").forEach(el => {
+  el.addEventListener("click", () => {
+    document.getElementById(el.dataset.target)
       .scrollIntoView({ behavior: "smooth" });
   });
 });
 
 // Scroll progress bar
 window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrolled = window.scrollY;
+  const height = document.body.scrollHeight - window.innerHeight;
   document.getElementById("progress-bar").style.width =
-    `${(scrollTop / docHeight) * 100}%`;
+    `${(scrolled / height) * 100}%`;
 });
 
-// Active nav highlight
+// Active nav
 const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
+const links = document.querySelectorAll("nav a");
 
 window.addEventListener("scroll", () => {
   let current = "";
-  sections.forEach(section => {
-    if (scrollY >= section.offsetTop - 150) {
-      current = section.id;
-    }
+  sections.forEach(sec => {
+    if (scrollY >= sec.offsetTop - 150) current = sec.id;
   });
-
-  navLinks.forEach(link => {
-    link.classList.toggle("active", link.dataset.target === current);
-  });
+  links.forEach(link =>
+    link.classList.toggle("active", link.dataset.target === current)
+  );
 });
 
 // Reveal on scroll
@@ -54,40 +51,9 @@ const phrases = [
 ];
 
 let i = 0;
+const dynamicLine = document.getElementById("dynamic-line");
+
 setInterval(() => {
-  document.getElementById("dynamic-line").textContent = phrases[i];
+  dynamicLine.textContent = phrases[i];
   i = (i + 1) % phrases.length;
 }, 3000);
-
-const visualizer = document.querySelector(".visualizer");
-
-window.addEventListener("scroll", () => {
-  const opacity = Math.max(0.2, 1 - window.scrollY / 600);
-  visualizer.style.opacity = opacity;
-});
-
-/* Mobile Optimization */
-@media (max-width: 768px) {
-  
-  /* Center the container on the screen */
-  .hero-header {
-    justify-content: center; /* Centers items horizontally */
-    width: 100%;             /* Ensures it spans full width */
-  }
-
-  /* Adjust the text size if needed */
-  .hero-header h1 {
-    font-size: 2rem; /* Keeps the name readable but not massive */
-    text-align: center;
-  }
-
-  /* Shrink the wave slightly for mobile balance */
-  .music-waves {
-    height: 20px; /* Smaller height */
-    gap: 2px;     /* Tighter spacing */
-  }
-  
-  .music-waves span {
-    width: 3px;   /* Thinner bars */
-  }
-}
