@@ -1,6 +1,14 @@
+/* =========================
+   Reset & Base
+   ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* =========================
-   Color System
+   Theme Variables
    ========================= */
 :root {
   --bg-green: #0D4715;
@@ -11,14 +19,27 @@
 }
 
 /* =========================
-   Reset & Base
+   Global Visual Layers
    ========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
 }
 
+/* 👇 THIS LINE GOES RIGHT HERE */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   Body Base Styles
+   ========================= */
 body {
   font-family: system-ui, sans-serif;
   color: var(--text-main);
@@ -109,6 +130,22 @@ nav a:hover {
   opacity: 1;
   transform: translateY(0);
 }
+
+.section h2 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.section h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  height: 1.2em;
+  width: 4px;
+  background: var(--accent);
+}
+
 
 /* =========================
    Hero
