@@ -88,36 +88,43 @@
 </section>
 
 <!-- CONTACT -->
-<!-- CONTACT -->
 <section id="contact" class="section hidden">
   <h2>Let’s Build Something</h2>
   <p class="contact-intro">
-    Got an idea, a problem, or just want to talk systems?
-    Say less — type more.
+    Got an idea, a question, or just vibing? Drop a message 👇
   </p>
 
-  <form id="contact-form" class="contact-form">
-    <div class="form-group">
-      <input type="text" id="name" required />
-      <label for="name">Your name</label>
+  <form
+    action="https://formspree.io/f/meeqwqzb"
+    method="POST"
+    class="contact-form"
+  >
+    <div class="field">
+      <label>Your name</label>
+      <input type="text" name="name" placeholder="Who am I talking to?" required>
     </div>
 
-    <div class="form-group">
-      <input type="email" id="email" required />
-      <label for="email">Your email</label>
+    <div class="field">
+      <label>Your email</label>
+      <input type="email" name="email" placeholder="So I can reply" required>
     </div>
 
-    <div class="form-group">
-      <textarea id="message" rows="4" required></textarea>
-      <label for="message">What’s on your mind?</label>
+    <div class="field">
+      <label>Your message</label>
+      <textarea
+        name="message"
+        rows="4"
+        placeholder="What’s on your mind?"
+        required
+      ></textarea>
     </div>
 
-    <button type="submit" id="send-btn">
-      <span class="btn-text">Send Message</span>
-      <span class="btn-loader"></span>
+    <!-- Optional hidden context -->
+    <input type="hidden" name="source" value="Portfolio Contact Form">
+
+    <button type="submit" class="submit-btn">
+      Send it 🚀
     </button>
-
-    <p id="form-status" class="form-status"></p>
   </form>
 </section>
 
