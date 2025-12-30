@@ -171,4 +171,12 @@ nav a:hover::after {
   padding-left: 1rem;
   border-left: 3px solid var(--accent);
 }
+.section {
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+}
+
 
