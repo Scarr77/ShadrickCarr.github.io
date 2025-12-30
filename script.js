@@ -58,3 +58,10 @@ setInterval(() => {
   document.getElementById("dynamic-line").textContent = phrases[i];
   i = (i + 1) % phrases.length;
 }, 3000);
+
+const visualizer = document.querySelector(".visualizer");
+
+window.addEventListener("scroll", () => {
+  const opacity = Math.max(0.2, 1 - window.scrollY / 600);
+  visualizer.style.opacity = opacity;
+});
