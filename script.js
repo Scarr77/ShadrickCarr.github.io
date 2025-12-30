@@ -7,17 +7,6 @@ document.querySelectorAll("[data-target]").forEach(item => {
   });
 });
 
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
-
 // Scroll progress bar
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
@@ -33,7 +22,6 @@ const navMenu = document.getElementById("nav-menu");
 menuToggle.addEventListener("click", () => {
   navMenu.classList.toggle("open");
 });
-
 
 // Active nav highlighting
 const sections = document.querySelectorAll("section");
@@ -55,6 +43,8 @@ window.addEventListener("scroll", () => {
     }
   });
 });
+
+// Dynamic rotating text
 const phrases = [
   "I build systems, not shortcuts.",
   "I learn by rebuilding environments.",
@@ -63,18 +53,14 @@ const phrases = [
 ];
 
 let index = 0;
+const dynamicLine = document.getElementById("dynamic-line");
+
 setInterval(() => {
-  document.getElementById("dynamic-line").textContent = phrases[index];
+  dynamicLine.textContent = phrases[index];
   index = (index + 1) % phrases.length;
 }, 3000);
 
-const phrases = [
-  "I build systems, not shortcuts.",
-  "I learn by rebuilding environments.",
-  "Creative thinking backed by infrastructure.",
-  "Iteration over imitation."
-];
-
+// Reveal on scroll
 const reveals = document.querySelectorAll(".reveal");
 
 const revealOnScroll = () => {
@@ -86,6 +72,4 @@ const revealOnScroll = () => {
   });
 };
 
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
-
+window.addEventListener("scroll", revealOnScroll)
