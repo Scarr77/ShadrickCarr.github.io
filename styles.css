@@ -155,6 +155,141 @@ nav a:hover {
   transition: all 0.8s ease;
 }
 
+/* ===============================
+   ENTERTAINING CONTACT FORM
+================================ */
+.contact-intro {
+  max-width: 520px;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
+.contact-form {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* Floating label group */
+.form-group {
+  position: relative;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem 0.8rem;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(46, 234, 106, 0.25);
+  border-radius: 10px;
+  color: var(--text-main);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Label */
+.form-group label {
+  position: absolute;
+  top: 50%;
+  left: 0.8rem;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all 0.25s ease;
+  background: transparent;
+}
+
+/* Focus / filled states */
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(46, 234, 106, 0.15);
+}
+
+.form-group input:focus + label,
+.form-group textarea:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -0.6rem;
+  left: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.8),
+    rgba(0,0,0,0.8)
+  );
+  padding: 0 0.4rem;
+  border-radius: 4px;
+}
+
+/* Send button */
+#send-btn {
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 2rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#send-btn.loading {
+  pointer-events: none;
+  background: rgba(46, 234, 106, 0.6);
+}
+
+.btn-text {
+  transition: opacity 0.3s ease;
+}
+
+.btn-loader {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+#send-btn.loading .btn-text {
+  opacity: 0;
+}
+
+#send-btn.loading .btn-loader {
+  opacity: 1;
+}
+
+/* Loader animation */
+.btn-loader::after {
+  content: "•••";
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  animation: dots 1.2s infinite ease;
+}
+
+@keyframes dots {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+.form-status {
+  margin-top: 0.6rem;
+  font-size: 0.95rem;
+  color: var(--accent);
+  animation: fadeUp 0.4s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* ============================
    HERO
    ============================ */
