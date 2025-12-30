@@ -339,3 +339,16 @@ button.secondary {
   width: 0%;
   z-index: 2000;
 }
+
+.submit-btn {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0,255,128,0.3);
+}
+
+.submit-btn:active {
+  transform: scale(0.97);
+}
