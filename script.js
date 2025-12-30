@@ -70,3 +70,34 @@ setInterval(() => {
     phrases[index];
   index = (index + 1) % phrases.length;
 }, 3000);
+
+// Entertaining contact form behavior
+const form = document.getElementById("contact-form");
+const status = document.getElementById("form-status");
+const sendBtn = document.getElementById("send-btn");
+
+const messages = [
+  "Message sent. I like the way you think.",
+  "Sent. This could be interesting.",
+  "Delivered. Let’s build.",
+  "Got it. I’ll be in touch.",
+  "Transmission successful."
+];
+
+if (form) {
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    sendBtn.classList.add("loading");
+    status.textContent = "";
+
+    setTimeout(() => {
+      sendBtn.classList.remove("loading");
+
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      status.textContent = msg;
+
+      form.reset();
+    }, 1200);
+  });
+}
