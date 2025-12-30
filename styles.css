@@ -1,26 +1,6 @@
-/* =========================
-   Reset & Base
-   ========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* =========================
-   Theme Variables
-   ========================= */
-:root {
-  --bg-green: #0D4715;
-  --bg-dark: #000000;
-  --text-main: #E6F4EA;
-  --text-muted: #A7CBB2;
-  --accent: #2EEA6A;
-}
-
-/* =========================
-   Global Visual Layers
-   ========================= */
+/* =====================
+   Global Effects
+===================== */
 body::before {
   content: "";
   position: fixed;
@@ -31,176 +11,121 @@ body::before {
   z-index: 0;
 }
 
-/* 👇 THIS LINE GOES RIGHT HERE */
-body > * {
-  position: relative;
-  z-index: 1;
+/* =====================
+   Color System
+===================== */
+:root {
+  --bg-green: #0D4715;
+  --bg-dark: #000000;
+  --text-main: #E6F4EA;
+  --text-muted: #A7CBB2;
+  --accent: #2EEA6A;
 }
 
-/* =========================
-   Body Base Styles
-   ========================= */
+/* =====================
+   Reset & Base
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, var(--bg-green), var(--bg-dark));
   color: var(--text-main);
-  background: linear-gradient(
-    180deg,
-    var(--bg-green) 0%,
-    var(--bg-dark) 60%
-  );
-  scroll-behavior: smooth;
+  line-height: 1.6;
 }
 
-/* =========================
-   Scroll Progress Bar
-   ========================= */
+/* =====================
+   Progress Bar
+===================== */
 #progress-bar {
   position: fixed;
   top: 0;
   left: 0;
   height: 3px;
+  background: var(--accent);
   width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--bg-green));
   z-index: 2000;
 }
 
-/* =========================
+/* =====================
    Navbar
-   ========================= */
+===================== */
 .navbar {
   position: fixed;
-  top: 3px;
+  top: 0;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(13, 71, 21, 0.95),
-    rgba(0, 0, 0, 0.95)
-  );
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
   z-index: 1000;
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(46, 234, 106, 0.15);
 }
 
 .logo {
-  font-weight: 900;
+  font-weight: bold;
   cursor: pointer;
-  color: var(--accent);
 }
 
 nav a {
   margin-left: 1.5rem;
   cursor: pointer;
-  color: var(--text-main);
+  color: var(--text-muted);
   text-decoration: none;
 }
 
-nav a.active,
-nav a:hover {
+nav a.active {
   color: var(--accent);
 }
 
-/* =========================
+.menu-toggle {
+  display: none;
+}
+
+/* =====================
    Sections
-   ========================= */
+===================== */
 .section {
   min-height: 100vh;
-  padding: 8rem 2rem;
-  max-width: 900px;
+  padding: 8rem 2rem 4rem;
+  max-width: 1100px;
   margin: auto;
 }
 
-
-.section:not(#home) {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
-  margin-bottom: 4rem;
-}
-
-.hidden {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.section h2 {
-  position: relative;
-  padding-left: 1rem;
-}
-
-.section h2::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.2rem;
-  height: 1.2em;
-  width: 4px;
-  background: var(--accent);
-}
-
-
-/* =========================
-   Hero
-   ========================= */
 .hero {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-}
-
-#home {
-  background: transparent;
-}
-
-.section:not(#home) {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
-  margin-bottom: 4rem;
-}
-
-#home h1,
-#home p,
-#home .subtitle {
-  color: var(--text-main);
-}
-
-#home .hero-text {
-  color: var(--text-muted);
-}
-
 .subtitle {
   display: block;
   font-size: 1.2rem;
-  color: var(--accent);
-  margin-top: 0.5rem;
+  color: var(--text-muted);
 }
 
 .hero-text {
   max-width: 600px;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   color: var(--text-muted);
 }
 
+/* =====================
+   Buttons
+===================== */
 .cta button {
-  padding: 0.8rem 1.5rem;
   margin-right: 1rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
   background: var(--accent);
   color: #000;
-  border-radius: 8px;
 }
 
 .cta .secondary {
@@ -209,131 +134,50 @@ nav a:hover {
   border: 1px solid var(--accent);
 }
 
-/* =========================
-   Lists & Text
-   ========================= */
-h1, h2, h3 {
-  color: var(--text-main);
-}
-
-p, li {
-  color: var(--text-muted);
-  line-height: 1.7;
-}
-
-.skills {
-  margin-top: 2rem;
-}
-
+/* =====================
+   Skills & Stack
+===================== */
 .skills li {
-  list-style: none;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  border-left: 3px solid var(--accent);
-}
-
-/* =========================
-   Scroll Hint
-   ========================= */
-.scroll-hint {
-  margin-top: 3rem;
-  opacity: 0.6;
-  animation: bounce 1.5s infinite;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-/* =========================
-   Mobile Menu
-   ========================= */
-.menu-toggle {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--text-main);
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: rgba(0, 0, 0, 0.95);
-    flex-direction: column;
-    width: 220px;
-    padding: 1rem;
-    display: none;
-  }
-
-  nav.open {
-    display: flex;
-  }
-
-  nav a {
-    margin: 1rem 0;
-  }
+  margin: 0.6rem 0;
 }
 
 .stack-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
   margin-top: 2rem;
 }
 
 .stack-grid h3 {
   color: var(--accent);
-  margin-bottom: 0.5rem;
 }
 
-.cta button {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* =====================
+   Stats
+===================== */
+.stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
 }
 
-.cta button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(46, 234, 106, 0.25);
-}
-
-.hidden {
-  opacity: 0;
-  transform: translateY(60px);
-}
-
-.show {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.scroll-hint {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { opacity: 0.4; }
-  50% { opacity: 0.8; }
-  100% { opacity: 0.4; }
-}
-
-.dynamic-line {
-  margin-top: 1rem;
+.stats strong {
+  font-size: 2rem;
   color: var(--accent);
-  font-size: 1rem;
-  opacity: 0.85;
-  transition: opacity 0.5s ease;
 }
 
+.stats span {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* =====================
+   Reveal Animation
+===================== */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(40px);
   transition: all 0.8s ease;
 }
 
@@ -342,19 +186,26 @@ p, li {
   transform: translateY(0);
 }
 
-.stats {
-  display: flex;
-  gap: 3rem;
-  margin-top: 3rem;
-}
+/* =====================
+   Mobile
+===================== */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    background: rgba(0,0,0,0.9);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    padding: 1rem;
+  }
 
-.stats div strong {
-  font-size: 2rem;
-  color: var(--accent);
-}
+  nav.open {
+    display: flex;
+  }
 
-.stats div span {
-  display: block;
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+  }
 }
