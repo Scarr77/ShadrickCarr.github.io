@@ -1,8 +1,7 @@
-// Smooth scroll navigation
+// Smooth scroll
 document.querySelectorAll("[data-target]").forEach(item => {
   item.addEventListener("click", () => {
-    document
-      .getElementById(item.dataset.target)
+    document.getElementById(item.dataset.target)
       .scrollIntoView({ behavior: "smooth" });
   });
 });
@@ -11,40 +10,42 @@ document.querySelectorAll("[data-target]").forEach(item => {
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
-  document.getElementById("progress-bar").style.width = `${progress}%`;
+  document.getElementById("progress-bar").style.width =
+    `${(scrollTop / docHeight) * 100}%`;
 });
 
-// Mobile menu toggle
-const menuToggle = document.getElementById("menu-toggle");
-const navMenu = document.getElementById("nav-menu");
-
-menuToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("open");
-});
-
-// Active nav highlighting
+// Active nav highlight
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
 window.addEventListener("scroll", () => {
   let current = "";
-
   sections.forEach(section => {
-    if (window.scrollY >= section.offsetTop - 140) {
+    if (scrollY >= section.offsetTop - 150) {
       current = section.id;
     }
   });
 
   navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.dataset.target === current) {
-      link.classList.add("active");
-    }
+    link.classList.toggle("active", link.dataset.target === current);
   });
 });
 
-// Dynamic rotating text
+// Reveal on scroll
+const reveals = document.querySelectorAll(".reveal");
+
+const revealOnScroll = () => {
+  reveals.forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+      el.classList.add("visible");
+    }
+  });
+};
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
+
+// Dynamic hero text
 const phrases = [
   "I build systems, not shortcuts.",
   "I learn by rebuilding environments.",
@@ -52,24 +53,8 @@ const phrases = [
   "Iteration over imitation."
 ];
 
-let index = 0;
-const dynamicLine = document.getElementById("dynamic-line");
-
+let i = 0;
 setInterval(() => {
-  dynamicLine.textContent = phrases[index];
-  index = (index + 1) % phrases.length;
+  document.getElementById("dynamic-line").textContent = phrases[i];
+  i = (i + 1) % phrases.length;
 }, 3000);
-
-// Reveal on scroll
-const reveals = document.querySelectorAll(".reveal");
-
-const revealOnScroll = () => {
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      el.classList.add("visible");
-    }
-  });
-};
-
-window.addEventListener("scroll", revealOnScroll)
