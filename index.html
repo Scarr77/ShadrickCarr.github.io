@@ -95,10 +95,19 @@
   </p>
 
   <form
-    action="https://formspree.io/f/meeqwqzb"
-    method="POST"
-    class="contact-form"
-  >
+  id="contact-form"
+  action="https://formspree.io/f/meeqwqzb"
+  method="POST"
+  class="contact-form"
+>
+  <input type="text" name="_gotcha" style="display:none">
+
+  <!-- fields stay the same -->
+
+  <button type="submit" class="submit-btn">Send it 🚀</button>
+
+  <p id="form-status" class="form-status"></p>
+</form>
     <div class="field">
       <label>Your name</label>
       <input type="text" name="name" placeholder="Who am I talking to?" required>
