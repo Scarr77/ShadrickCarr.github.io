@@ -280,3 +280,45 @@ p, li {
     margin: 1rem 0;
   }
 }
+
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.stack-grid h3 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.cta button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(46, 234, 106, 0.25);
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(60px);
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scroll-hint {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.4; }
+}
