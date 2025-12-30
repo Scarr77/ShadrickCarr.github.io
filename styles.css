@@ -342,3 +342,19 @@ p, li {
   transform: translateY(0);
 }
 
+.stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.stats div strong {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.stats div span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
