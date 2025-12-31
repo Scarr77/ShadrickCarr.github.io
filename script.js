@@ -146,3 +146,12 @@ if (form && status) {
     }
   });
 }
+
+window.addEventListener("scroll", () => {
+  const speed = Math.max(0.4, 1 - window.scrollY / 1500);
+  document
+    .querySelectorAll(".nav-spectrum span")
+    .forEach(bar => {
+      bar.style.animationDuration = `${speed}s`;
+    });
+});
