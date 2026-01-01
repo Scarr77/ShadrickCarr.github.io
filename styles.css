@@ -1,12 +1,12 @@
 /* ===============================
-   CSS VARIABLES
+   VARIABLES
 ================================ */
 :root {
   --bg-green: #0D4715;
   --bg-dark: #000;
-  --text-main: #E6F4EA;
-  --text-muted: #A7CBB2;
   --accent: #7CFF8A;
+  --text-main: #E6F4EA;
+  --text-muted: #9FCBB0;
 }
 
 /* ===============================
@@ -28,7 +28,7 @@ body {
 }
 
 /* ===============================
-   SCROLL PROGRESS
+   SCROLL BAR
 ================================ */
 #progress-bar {
   position: fixed;
@@ -56,12 +56,53 @@ body {
   backdrop-filter: blur(10px);
 }
 
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .logo {
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1.2rem;
   color: var(--accent);
   cursor: pointer;
 }
 
+/* ===============================
+   MUSIC SPECTRUM (CSS ONLY)
+================================ */
+.nav-spectrum {
+  display: flex;
+  align-items: flex-end;
+  height: 20px;
+  gap: 4px;
+}
+
+.nav-spectrum span {
+  width: 4px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: spectrumPulse 1s infinite ease-in-out;
+}
+
+.nav-spectrum span:nth-child(odd) {
+  animation-duration: 0.8s;
+}
+.nav-spectrum span:nth-child(even) {
+  animation-duration: 1.4s;
+}
+
+@keyframes spectrumPulse {
+  0% { height: 6px; }
+  50% { height: 20px; }
+  100% { height: 8px; }
+}
+
+/* ===============================
+   NAV LINKS
+================================ */
 nav a {
   margin-left: 1.5rem;
   cursor: pointer;
@@ -69,52 +110,9 @@ nav a {
   text-decoration: none;
 }
 
-nav a.active {
-  color: var(--accent);
-}
-
 .menu-toggle {
   display: none;
   cursor: pointer;
-}
-/* ===============================
-   SPECTRUM
-================================ */
-.logo-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.nav-spectrum {
-  display: flex;
-  align-items: flex-end;
-  height: 16px;
-  gap: 3px;
-}
-
-.nav-spectrum span {
-  width: 3px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 2px;
-  animation: spectrum 1.2s infinite ease-in-out;
-  opacity: 0.85;
-}
-
-.nav-spectrum span:nth-child(1) { animation-delay: 0s; }
-.nav-spectrum span:nth-child(2) { animation-delay: .1s; }
-.nav-spectrum span:nth-child(3) { animation-delay: .2s; }
-.nav-spectrum span:nth-child(4) { animation-delay: .3s; }
-.nav-spectrum span:nth-child(5) { animation-delay: .4s; }
-.nav-spectrum span:nth-child(6) { animation-delay: .3s; }
-.nav-spectrum span:nth-child(7) { animation-delay: .2s; }
-.nav-spectrum span:nth-child(8) { animation-delay: .1s; }
-
-@keyframes spectrum {
-  0%   { height: 4px; }
-  50%  { height: 16px; }
-  100% { height: 6px; }
 }
 
 /* ===============================
@@ -135,13 +133,12 @@ nav a.active {
   display: block;
   font-size: 1.4rem;
   color: var(--text-muted);
-  margin-top: 0.5rem;
 }
 
 .dynamic-line {
   margin: 1.5rem 0;
-  font-style: italic;
   color: var(--accent);
+  font-style: italic;
 }
 
 .cta button {
@@ -158,27 +155,8 @@ nav a.active {
   color: var(--accent);
 }
 
-.scroll-hint {
-  margin-top: 2rem;
-  opacity: 0.6;
-}
-
 /* ===============================
-   REVEAL
-================================ */
-.hidden {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
-.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===============================
-   STACK / PROJECTS
+   GRIDS
 ================================ */
 .stack-grid,
 .projects-grid {
@@ -186,25 +164,6 @@ nav a.active {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
-}
-
-.project-card {
-  background: rgba(0,0,0,0.4);
-  padding: 1.8rem;
-  border-radius: 16px;
-  backdrop-filter: blur(8px);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-6px);
-}
-
-.project-tags {
-  display: block;
-  margin: 1rem 0;
-  font-size: 0.85rem;
-  color: var(--text-muted);
 }
 
 /* ===============================
@@ -215,29 +174,21 @@ nav a.active {
   margin-top: 2rem;
 }
 
-.field {
-  margin-bottom: 1rem;
-}
-
-input, textarea {
+.contact-form input,
+.contact-form textarea {
   width: 100%;
+  margin-bottom: 1rem;
   padding: 0.7rem;
   border-radius: 6px;
   border: none;
 }
 
-.submit-btn {
-  margin-top: 1rem;
+.contact-form button {
   padding: 0.8rem 1.6rem;
   background: var(--accent);
   border: none;
   border-radius: 8px;
   cursor: pointer;
-}
-
-.form-status {
-  margin-top: 1rem;
-  color: var(--accent);
 }
 
 /* ===============================
@@ -250,19 +201,10 @@ input, textarea {
 
   nav {
     display: none;
-    flex-direction: column;
-    background: rgba(0,0,0,0.95);
-    position: absolute;
-    top: 100%;
-    right: 0;
-    padding: 1rem;
   }
 
-  nav.open {
-    display: flex;
-  }
-
-  nav a {
-    margin: 1rem 0;
+  .nav-spectrum {
+    height: 14px;
+    opacity: 0.6;
   }
 }
