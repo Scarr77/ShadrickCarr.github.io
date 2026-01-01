@@ -5,7 +5,6 @@
   <title>Shadrick Carr | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO / Sharing -->
   <meta name="description" content="Creative Technologist focused on cloud infrastructure, automation, and interaction-driven design.">
   <meta property="og:title" content="Shadrick Carr | Creative Technologist">
   <meta property="og:description" content="I build systems, not shortcuts.">
@@ -15,7 +14,7 @@
 
 <body>
 
-<!-- Scroll Progress -->
+<!-- Scroll progress -->
 <div id="progress-bar"></div>
 
 <!-- NAVBAR -->
@@ -23,8 +22,8 @@
   <div class="logo-wrap">
     <div class="logo" data-target="home">SC</div>
 
-    <!-- Music / visual spectrum -->
-    <div class="nav-spectrum" aria-hidden="true">
+    <!-- MUSIC SPECTRUM (CSS ONLY) -->
+    <div class="nav-spectrum">
       <span></span>
       <span></span>
       <span></span>
@@ -55,7 +54,6 @@
     <span class="subtitle">Creative Technologist</span>
   </h1>
 
-  <!-- Rotating phrase -->
   <p id="dynamic-line" class="dynamic-line"></p>
 
   <div class="cta">
@@ -106,31 +104,14 @@
   <div class="projects-grid">
     <div class="project-card">
       <h3>AWS Cloud Lab Rebuild</h3>
-      <p>
-        Designed and rebuilt AWS infrastructure using EC2, VPC, IAM, and S3.
-        Learned by breaking and rebuilding environments.
-      </p>
+      <p>Designed and rebuilt AWS infrastructure by breaking and rebuilding environments.</p>
       <span class="project-tags">AWS • EC2 • IAM • Networking</span>
-      <a href="#" target="_blank">View on GitHub →</a>
     </div>
 
     <div class="project-card">
       <h3>Portfolio Website</h3>
-      <p>
-        Built this portfolio from scratch with responsive layout, motion,
-        and accessibility-first structure.
-      </p>
+      <p>Responsive, animated portfolio built from scratch.</p>
       <span class="project-tags">HTML • CSS • JavaScript</span>
-      <a href="https://github.com/Scarr77" target="_blank">Source Code →</a>
-    </div>
-
-    <div class="project-card">
-      <h3>Automation Scripts</h3>
-      <p>
-        Shell scripts to automate environment setup and repetitive workflows.
-      </p>
-      <span class="project-tags">Shell • Automation</span>
-      <a href="#" target="_blank">View Scripts →</a>
     </div>
   </div>
 </section>
@@ -138,60 +119,20 @@
 <!-- STORY -->
 <section id="story" class="section hidden">
   <h2>My Story</h2>
-  <p>
-    I started in creative work—music, design, experimentation—where curiosity
-    mattered more than credentials.
-  </p>
-  <p>
-    That curiosity pulled me into systems: rebuilding environments, breaking
-    infrastructure, and learning how things actually work.
-  </p>
-  <p>
-    I don’t chase shortcuts. I build foundations.
-  </p>
+  <p>I started in creative work where curiosity mattered more than credentials.</p>
+  <p>That curiosity pulled me into systems, infrastructure, and automation.</p>
+  <p>I don’t chase shortcuts. I build foundations.</p>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="section hidden">
   <h2>Let’s Build Something</h2>
-  <p class="contact-intro">
-    Got an idea, a question, or just vibing? Drop a message 👇
-  </p>
 
-  <form
-    id="contact-form"
-    action="https://formspree.io/f/meeqwqzb"
-    method="POST"
-    class="contact-form"
-  >
-    <!-- Spam honeypot -->
-    <input type="text" name="_gotcha" style="display:none">
-
-    <div class="field">
-      <label>Your name</label>
-      <input type="text" name="name" placeholder="Who am I talking to?" required>
-    </div>
-
-    <div class="field">
-      <label>Your email</label>
-      <input type="email" name="email" placeholder="So I can reply" required>
-    </div>
-
-    <div class="field">
-      <label>Your message</label>
-      <textarea
-        name="message"
-        rows="4"
-        placeholder="What’s on your mind?"
-        required
-      ></textarea>
-    </div>
-
-    <input type="hidden" name="source" value="Portfolio Contact Form">
-
-    <button type="submit" class="submit-btn">Send it 🚀</button>
-
-    <p id="form-status" class="form-status"></p>
+  <form class="contact-form">
+    <input type="text" placeholder="Your name" required>
+    <input type="email" placeholder="Your email" required>
+    <textarea rows="4" placeholder="Your message" required></textarea>
+    <button type="submit">Send it 🚀</button>
   </form>
 </section>
 
