@@ -1,68 +1,47 @@
-// ===============================
 // Smooth scroll navigation
-// ===============================
 document.querySelectorAll("[data-target]").forEach(el => {
   el.addEventListener("click", () => {
     const target = document.getElementById(el.dataset.target);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+    if (target) target.scrollIntoView({ behavior: "smooth" });
 
     const navMenu = document.getElementById("nav-menu");
     if (navMenu) navMenu.classList.remove("open");
   });
 });
 
-// ===============================
 // Scroll reveal
-// ===============================
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add("show");
+  });
+}, { threshold: 0.15 });
 
 document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
 
-// ===============================
 // Scroll progress bar
-// ===============================
 window.addEventListener("scroll", () => {
+  const bar = document.getElementById("progress-bar");
+  if (!bar) return;
+
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
-  const bar = document.getElementById("progress-bar");
-
-  if (bar) {
-    bar.style.width = `${(scrollTop / docHeight) * 100}%`;
-  }
+  bar.style.width = `${(scrollTop / docHeight) * 100}%`;
 });
 
-// ===============================
 // Mobile menu toggle
-// ===============================
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 
-if (menuToggle && navMenu) {
-  menuToggle.addEventListener("click", () => {
-    navMenu.classList.toggle("open");
-  });
-}
+menuToggle?.addEventListener("click", () => {
+  navMenu.classList.toggle("open");
+});
 
-// ===============================
 // Active nav highlighting
-// ===============================
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
 window.addEventListener("scroll", () => {
   let current = "";
-
   sections.forEach(section => {
     if (window.scrollY >= section.offsetTop - 150) {
       current = section.id;
@@ -70,16 +49,11 @@ window.addEventListener("scroll", () => {
   });
 
   navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.dataset.target === current) {
-      link.classList.add("active");
-    }
+    link.classList.toggle("active", link.dataset.target === current);
   });
 });
 
-// ===============================
-// Phrase rotator (hero text)
-// ===============================
+// Phrase rotator
 const phrases = [
   "I build systems, not shortcuts.",
   "I learn by rebuilding environments.",
@@ -97,75 +71,56 @@ if (dynamicLine) {
   }, 3000);
 }
 
-// ===============================
-// Navbar music spectrum (scroll-reactive)
-// ===============================
-const spectrumBars = document.querySelectorAll(".nav-spectrum span");
+// Hero parallax
+const heroParallax = document.querySelector(".hero-parallax");
+window.addEventListener("scroll", () => {
+  if (!heroParallax) return;
+  heroParallax.style.transform =
+    `translateY(${window.scrollY * 0.15}px)`;
+});
 
+// Spectrum reacts to scroll
+const spectrumBars = document.querySelectorAll(".nav-spectrum span");
 window.addEventListener("scroll", () => {
   const speed = Math.max(0.5, 1.2 - window.scrollY / 1200);
-
   spectrumBars.forEach(bar => {
     bar.style.animationDuration = `${speed}s`;
   });
 });
 
-// ===============================
 // Pause spectrum when tab inactive
-// ===============================
 document.addEventListener("visibilitychange", () => {
   const state = document.hidden ? "paused" : "running";
-
   spectrumBars.forEach(bar => {
     bar.style.animationPlayState = state;
   });
 });
 
-// ===============================
-// Contact form (Formspree + feedback)
-// ===============================
+// Contact form (Formspree)
 const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
 
-const messages = [
-  "Message sent. I like the way you think.",
-  "Sent. This could be interesting.",
-  "Delivered. Let’s build.",
-  "Got it. I’ll be in touch.",
-  "Transmission successful."
-];
-
 if (form && status) {
-  status.setAttribute("aria-live", "polite");
-
   form.addEventListener("submit", async e => {
     e.preventDefault();
-
     status.textContent = "Sending…";
-
-    const submitBtn = form.querySelector("button[type='submit']");
-    if (submitBtn) submitBtn.disabled = true;
 
     const data = new FormData(form);
 
     try {
-      const response = await fetch(form.action, {
+      const res = await fetch(form.action, {
         method: form.method,
         body: data,
         headers: { Accept: "application/json" }
       });
 
-      if (response.ok) {
-        status.textContent =
-          messages[Math.floor(Math.random() * messages.length)];
-        form.reset();
-      } else {
-        status.textContent = "Something went wrong. Try again.";
-      }
-    } catch (err) {
-      status.textContent = "Network error. Please try later.";
-    }
+      status.textContent = res.ok
+        ? "Message sent. I’ll be in touch."
+        : "Something went wrong. Try again.";
 
-    if (submitBtn) submitBtn.disabled = false;
+      if (res.ok) form.reset();
+    } catch {
+      status.textContent = "Network error. Try again later.";
+    }
   });
 }
