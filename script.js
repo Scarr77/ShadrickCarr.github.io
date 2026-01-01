@@ -1,4 +1,6 @@
+// ===============================
 // Smooth scroll navigation
+// ===============================
 document.querySelectorAll("[data-target]").forEach(el => {
   el.addEventListener("click", () => {
     const target = document.getElementById(el.dataset.target);
@@ -11,26 +13,38 @@ document.querySelectorAll("[data-target]").forEach(el => {
   });
 });
 
+// ===============================
 // Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-    }
-  });
-}, { threshold: 0.15 });
+// ===============================
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
 
 document.querySelectorAll(".hidden").forEach(el => observer.observe(el));
 
+// ===============================
 // Scroll progress bar
+// ===============================
 window.addEventListener("scroll", () => {
   const scrollTop = window.scrollY;
   const docHeight = document.body.scrollHeight - window.innerHeight;
   const bar = document.getElementById("progress-bar");
-  if (bar) bar.style.width = `${(scrollTop / docHeight) * 100}%`;
+
+  if (bar) {
+    bar.style.width = `${(scrollTop / docHeight) * 100}%`;
+  }
 });
 
+// ===============================
 // Mobile menu toggle
+// ===============================
 const menuToggle = document.getElementById("menu-toggle");
 const navMenu = document.getElementById("nav-menu");
 
@@ -40,12 +54,15 @@ if (menuToggle && navMenu) {
   });
 }
 
+// ===============================
 // Active nav highlighting
+// ===============================
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll("nav a");
 
 window.addEventListener("scroll", () => {
   let current = "";
+
   sections.forEach(section => {
     if (window.scrollY >= section.offsetTop - 150) {
       current = section.id;
@@ -60,7 +77,9 @@ window.addEventListener("scroll", () => {
   });
 });
 
-// Phrase rotator
+// ===============================
+// Phrase rotator (hero text)
+// ===============================
 const phrases = [
   "I build systems, not shortcuts.",
   "I learn by rebuilding environments.",
@@ -78,7 +97,33 @@ if (dynamicLine) {
   }, 3000);
 }
 
+// ===============================
+// Navbar music spectrum (scroll-reactive)
+// ===============================
+const spectrumBars = document.querySelectorAll(".nav-spectrum span");
+
+window.addEventListener("scroll", () => {
+  const speed = Math.max(0.5, 1.2 - window.scrollY / 1200);
+
+  spectrumBars.forEach(bar => {
+    bar.style.animationDuration = `${speed}s`;
+  });
+});
+
+// ===============================
+// Pause spectrum when tab inactive
+// ===============================
+document.addEventListener("visibilitychange", () => {
+  const state = document.hidden ? "paused" : "running";
+
+  spectrumBars.forEach(bar => {
+    bar.style.animationPlayState = state;
+  });
+});
+
+// ===============================
 // Contact form (Formspree + feedback)
+// ===============================
 const form = document.getElementById("contact-form");
 const status = document.getElementById("form-status");
 
@@ -91,9 +136,15 @@ const messages = [
 ];
 
 if (form && status) {
+  status.setAttribute("aria-live", "polite");
+
   form.addEventListener("submit", async e => {
     e.preventDefault();
+
     status.textContent = "Sending…";
+
+    const submitBtn = form.querySelector("button[type='submit']");
+    if (submitBtn) submitBtn.disabled = true;
 
     const data = new FormData(form);
 
@@ -111,8 +162,10 @@ if (form && status) {
       } else {
         status.textContent = "Something went wrong. Try again.";
       }
-    } catch {
-      status.textContent = "Network error. Try again later.";
+    } catch (err) {
+      status.textContent = "Network error. Please try later.";
     }
+
+    if (submitBtn) submitBtn.disabled = false;
   });
 }
